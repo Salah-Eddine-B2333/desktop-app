@@ -5,13 +5,9 @@
   "version": "3.3.0-b1",
   "description": "Station",
   "homepage": "https://getstation.com",
-  "author": {
-    "name": "Joël Charles",
-    "email": "joel.charles91@gmail.com",
-    "url": "https://github.com/magne4000"
-  },
+  "author": "Bouazza Salah eddine <Bouazza_Salah_Eddine2333@protonmail.com> (https://github.com/Salah-Eddine-B2333)",
   "contributors": [],
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "main": "dist/main.js",
   "scripts": {
     "build": "yarn workspaces foreach --all --topological run build",
@@ -25,18 +21,32 @@
     "packages/*"
   ],
   "bin": {
-    "electron": "./node_modules/.bin/electron"
+    "electron": "node_modules/.bin/electron"
   },
   "devDependencies": {
     "rimraf": "^5.0.10"
   },
-  "devEngines": {
-    "node": ">=18.0.0",
+  "engines": {
+    "node": ">=22.22.0",
     "yarn": ">=4.1.0"
   },
   "volta": {
-    "node": "18.14.0",
+    "node": "22.22.0",
     "yarn": "4.1.0"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.0",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Salah-Eddine-B2333/desktop-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Salah-Eddine-B2333/desktop-app/issues"
+  },
+  "keywords": [],
+  "dependencies": {
+    "update-electron-app": "^3.1.2"
+  }
 }

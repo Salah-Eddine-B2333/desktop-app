@@ -5,9 +5,9 @@
   "description": "Station",
   "homepage": "https://getstation.com",
   "author": {
-    "name": "Joël Charles",
-    "email": "joel.charles91@gmail.com",
-    "url": "https://github.com/magne4000"
+    "name": "Bouazza Salah eddine",
+    "email": "Bouazza_Salah_Eddine2333@protonmail.com",
+    "url": "https://github.com/Salah-Eddine-B2333"
   },
   "repository": {
     "type": "git",
@@ -284,7 +284,7 @@
     "copy-webpack-plugin": "^4.6.0",
     "cross-env": "^6.0.3",
     "css-loader": "^3.2.1",
-    "electron": "27.3.11",
+    "electron": "^41.3.0",
     "electron-builder": "^24.9.1",
     "electron-mocha": "^12.1.0",
     "electron-webpack": "^2.8.2",
