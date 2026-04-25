@@ -48,4 +48,33 @@ module.exports = (env, argv) => merge.smart(baseConfig(env, argv), {
     path: path.resolve(__dirname, 'dist', 'renderer'),
     chunkFilename: '[name].bundle.js',
   },
+
+  performance: {
+    // This is an internal Electron web UI page; the bundle is still small enough for desktop use.
+    maxAssetSize: 1024 * 1024,
+    maxEntrypointSize: 1024 * 1024,
+    hints: 'warning',
+  },
+
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 20000,
+      maxSize: 244000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+          enforce: true,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+    runtimeChunk: 'single',
+  },
 });
