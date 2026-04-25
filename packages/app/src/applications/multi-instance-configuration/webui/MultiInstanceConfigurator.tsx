@@ -4,12 +4,11 @@ import injectSheet from 'react-jss';
 import ApplicationContainer from '../../../common/containers/ApplicationContainer';
 import { interpretedIconUrl } from '../../helpers';
 import { BxAppManifest } from '../../manifest-provider/bxAppManifest';
+import ChooseIdentityForm from './components/ChooseIdentityForm';
+import ChooseCommonForm from './components/ChooseCommonForm';
 import { MultiInstanceConfigPreset as Preset } from '../../manifest-provider/types';
+import NormalFlowForm from './components/NormalFlowForm';
 import { getPresets } from '../../manifest-provider/helpers';
-
-const ChooseIdentityForm = React.lazy(() => import('./components/ChooseIdentityForm'));
-const ChooseCommonForm = React.lazy(() => import('./components/ChooseCommonForm'));
-const NormalFlowForm = React.lazy(() => import('./components/NormalFlowForm'));
 
 const requestGoogleSignin = () => window.bxApi.identities.requestLogin('google');
 
@@ -158,14 +157,12 @@ export default class MultiInstanceConfigurator extends React.Component<Props, St
   renderIdentityForm() {
     const { manifest } = this.state;
     return (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <ChooseIdentityForm
-          name={manifest!.name!}
-          onRequestSignin={requestGoogleSignin}
-          instanceTypeWording={manifest!.bx_multi_instance_config!.instance_wording}
-          onAccountChosen={this.submitIdentityForm}
-        />
-      </React.Suspense>
+      <ChooseIdentityForm
+        name={manifest!.name!}
+        onRequestSignin={requestGoogleSignin}
+        instanceTypeWording={manifest!.bx_multi_instance_config!.instance_wording}
+        onAccountChosen={this.submitIdentityForm}
+      />
     );
   }
 
@@ -173,17 +170,15 @@ export default class MultiInstanceConfigurator extends React.Component<Props, St
     const { manifest } = this.state;
     const presets = this.getPresets();
     return (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <ChooseCommonForm
-          help={manifest!.bx_multi_instance_config!.subdomain_ui_help}
-          domainSuffix={manifest!.bx_multi_instance_config!.subdomain_ui_suffix!}
-          onSubmit={this.submitSubdomainForm}
-          navigateWording="I have a self-hosted instance"
-          navigateHint="Choose this if your company uses a different kind of URL for this app"
-          withNavigationLink={presets.length > 1}
-          onClickNavigate={this.setNextSelectedPreset}
-        />
-      </React.Suspense>
+      <ChooseCommonForm
+        help={manifest!.bx_multi_instance_config!.subdomain_ui_help}
+        domainSuffix={manifest!.bx_multi_instance_config!.subdomain_ui_suffix!}
+        onSubmit={this.submitSubdomainForm}
+        navigateWording="I have a self-hosted instance"
+        navigateHint="Choose this if your company uses a different kind of URL for this app"
+        withNavigationLink={presets.length > 1}
+        onClickNavigate={this.setNextSelectedPreset}
+      />
     );
   }
 
@@ -195,32 +190,28 @@ export default class MultiInstanceConfigurator extends React.Component<Props, St
       : 'Choose this if your company uses a subdomain for this app';
 
     return (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <ChooseCommonForm
-          largeInput={true}
-          help={this.getCommonFormHelpMessage()}
-          placeholder="https://app.mycompany.com"
-          domainSuffix=""
-          onSubmit={this.submitOnPremiseForm}
-          navigateWording={navigateWording}
-          navigateHint={navigateHint}
-          withNavigationLink={withNavigationLink}
-          onClickNavigate={this.setNextSelectedPreset}
-        />
-      </React.Suspense>
+      <ChooseCommonForm
+        largeInput={true}
+        help={this.getCommonFormHelpMessage()}
+        placeholder="https://app.mycompany.com"
+        domainSuffix=""
+        onSubmit={this.submitOnPremiseForm}
+        navigateWording={navigateWording}
+        navigateHint={navigateHint}
+        withNavigationLink={withNavigationLink}
+        onClickNavigate={this.setNextSelectedPreset}
+      />
     );
   }
 
   renderNormalFlowForm() {
     return (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <NormalFlowForm
-          appHostname={this.getAppHostname()}
-          onClickUseSelfInstance={this.setNextSelectedPreset}
-          onClickGoToApp={this.submitNormalForm}
-          selfInstanceHint="Choose this if your company uses a different kind of URL for this app"
-        />
-      </React.Suspense>
+      <NormalFlowForm
+        appHostname={this.getAppHostname()}
+        onClickUseSelfInstance={this.setNextSelectedPreset}
+        onClickGoToApp={this.submitNormalForm}
+        selfInstanceHint="Choose this if your company uses a different kind of URL for this app"
+      />
     );
   }
 
